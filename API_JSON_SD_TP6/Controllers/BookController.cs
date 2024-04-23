@@ -38,5 +38,16 @@ namespace API_JSON_SD_TP6.Controllers
 
             return CreatedAtAction(nameof(GetBookById), new { id = book.Id }, book);
         }
+
+        [HttpDelete]
+        public IActionResult DeleteBook(int id)
+        {
+            var book = _books.FirstOrDefault(b => b.Id == id);
+            if (book == null)
+                return NotFound();
+            _books.Remove(book);
+
+            return Ok();
+        }
     }
 }
